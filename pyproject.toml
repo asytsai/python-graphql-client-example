@@ -1,0 +1,17 @@
+# `pyproject.toml` file
+[tool.poetry]
+name = "python_graphql_client_example"
+version = "0.1.0"
+description = "Github GraphQL client."
+authors = ["FirstName SecondName <email>"]
+readme = "README.md"
+packages = [{include = "python_graphql_client_example"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-dotenv = "^1.0.1"
+requests = "^2.31.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
