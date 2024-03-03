@@ -7,12 +7,14 @@ class RequestTransport(BaseTransport):
     """The transport based on requests library."""
 
     session: Optional[r.Session]
+    DEFAULT_TIMEOUT: int = 1
 
     def __init__(self, endpoint: str, token: str, **kwargs: Any) -> None:
         self.endpoint = endpoint
         self.token = token
         self.auth_header = {"Authorization": f"Bearer {self.token}"}
         self.session = None
+        self.timeout = kwargs.get("timeout", RequestTransport.DEFAULT_TIMEOUT)
 
     def connect(self) -> None:
         """Start a 'requests.Session connection."""
@@ -35,6 +37,7 @@ class RequestTransport(BaseTransport):
         post_args = {
             "headers": self.auth_header,
             "json": {"query": query, "variables": variables},
+            "timeout": self.timeout,
         }
         post_args["headers"]["Content-type"] = "application/json"
 
